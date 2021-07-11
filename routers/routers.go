@@ -1,9 +1,16 @@
 package routers
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"github.com/SirusCodes/go-todo/database"
+	"github.com/SirusCodes/go-todo/models"
+	"github.com/gofiber/fiber/v2"
+	"github.com/google/uuid"
+)
 
 func getTodos(c *fiber.Ctx) error {
-	return c.SendString("Get Todos")
+	var todos []models.Todo
+	database.DBConn.Find(&todos)
+	return c.JSON(todos)
 }
 
 func getTodo(c *fiber.Ctx) error {
@@ -12,7 +19,14 @@ func getTodo(c *fiber.Ctx) error {
 }
 
 func saveTodo(c *fiber.Ctx) error {
-	return c.SendString("Save Todo")
+	todo := models.Todo{
+		ID:        uuid.UUID{},
+		Task:      "Task",
+		Completed: false,
+		CreatedBy: "Darshan",
+	}
+	database.DBConn.Create(&todo)
+	return c.JSON(todo)
 }
 
 func updateTodo(c *fiber.Ctx) error {
