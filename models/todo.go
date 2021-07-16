@@ -6,8 +6,8 @@ import (
 
 type Todo struct {
 	gorm.Model
-	ID        string
-	Task      string
-	Completed bool
-	CreatedBy string
+	ID        string `json:"id"`
+	Task      string `json:"task"`
+	Completed bool   `json:"completed"`
+	CreatedBy string `json:"created_by"`
 }
