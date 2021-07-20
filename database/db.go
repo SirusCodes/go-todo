@@ -25,4 +25,5 @@ func InitDB() {
 	sqlDB.Stats()
 
 	db.AutoMigrate(&models.Todo{})
+	db.AutoMigrate(&models.User{})
 }

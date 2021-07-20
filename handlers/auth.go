@@ -63,7 +63,13 @@ func verifyPassword(hash string, password string) bool {
 }
 
 func verifyToken(token string, sign string) (*JWTPayload, error) {
-	tkn, err := jwt.ParseWithClaims(token, &JWTPayload{}, func(token *jwt.Token) (interface{}, error) {
+	claims := &JWTPayload{}
+	tkn, err := jwt.ParseWithClaims(token, claims, func(token *jwt.Token) (interface{}, error) {
+		_, ok := token.Method.(*jwt.SigningMethodHMAC)
+
+		if !ok {
+			return nil, errors.New("token is invalid")
+		}
 		return []byte(config.Config(sign)), nil
 	})
 
@@ -71,34 +77,38 @@ func verifyToken(token string, sign string) (*JWTPayload, error) {
 		return nil, err
 	}
 
-	payload, ok := tkn.Claims.(*JWTPayload)
-	if !ok {
-		return nil, errors.New("cannot parse claims")
+	if !tkn.Valid {
+		return nil, errors.New("expired")
 	}
 
-	return payload, nil
+	return claims, nil
 }
 
 func Register(c *fiber.Ctx) error {
 	user := new(models.User)
+	req := new(models.User)
 
-	if err := c.BodyParser(user); err != nil {
+	if err := c.BodyParser(req); err != nil {
 		return c.Status(400).JSON(Response{Status: "error", Message: "incorrect body structue"})
 	}
 
-	database.DBConn.First(&user, "username = ?", user.Username)
+	database.DBConn.First(&user, "username=?", req.Username)
 
 	if user.Username != "" {
 		return c.Status(400).JSON(Response{Status: "error", Message: "username already exists"})
 	}
 
-	hash, err := hashPassword(user.Password)
+	hash, err := hashPassword(req.Password)
 
 	if err != nil {
 		return c.Status(400).JSON(Response{Status: "error", Message: "password hashing error"})
 	}
 
-	user.Password = hash
+	user = &models.User{
+		Username: req.Username,
+		Password: hash,
+		Email:    req.Email,
+	}
 	if err := database.DBConn.Create(&user).Error; err != nil {
 		return c.Status(400).JSON(Response{Status: "error", Message: "could not create user"})
 	}
@@ -141,7 +151,7 @@ func Login(c *fiber.Ctx) error {
 func GetRefreshToken(c *fiber.Ctx) error {
 	type RefreshTokenRequest struct {
 		Username     string `json:"username"`
-		RefreshToken string `json:"refresh_token"`
+		RefreshToken string `json:"refresh_token" form:"refresh_token"`
 	}
 	var refreshTokenRequest RefreshTokenRequest
 

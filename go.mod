@@ -8,7 +8,8 @@ require (
 	github.com/fatih/color v1.12.0 // indirect
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/gofiber/fiber v1.14.6
-	github.com/gofiber/fiber/v2 v2.12.0
+	github.com/gofiber/fiber/v2 v2.14.0
+	github.com/gofiber/jwt/v2 v2.2.4
 	github.com/golang-jwt/jwt v3.2.1+incompatible // indirect
 	github.com/google/uuid v1.2.0 // indirect
 	github.com/joho/godotenv v1.3.0
