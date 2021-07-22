@@ -9,6 +9,7 @@ button{
     border-radius: 30px;
     border: none;
     cursor: pointer;
+    font-weight: 600;
 }
 
 input{
@@ -91,4 +92,15 @@ input{
 .auth-body{
     display: flex;
     flex-direction: column;
+}
+
+.switch-auth{
+    display: flex;
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+.switch-auth a{
+    text-decoration: none;
+    color: #2196F3;
 }
