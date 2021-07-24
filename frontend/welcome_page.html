@@ -19,24 +19,26 @@
         </h4>
     </div>
     <!-- Login -->
-    <div class="auth-body">
+    <div class="auth-body" id="login" style="display: none;">
         <input type="text" placeholder="Username">
         <input type="password" placeholder="Password">
         <button>Login</button>
         <div class="switch-auth">
-            <span>Don't have an account?&nbsp;</span><a href="#">Sign up</a>
+            <span>Don't have an account?&nbsp;</span><a id="register-switcher">Register</a>
         </div>
     </div>
-    <!-- Sign up -->
-    <!-- <div class="auth-body">
+    <!-- Register -->
+    <div class="auth-body" id="register">
         <input type="text" placeholder="Username">
         <input type="password" placeholder="Password">
         <input type="password" placeholder="Confirm password">
-        <button>Sign up</button>
+        <button>Register</button>
         <div class="switch-auth">
-            <span>Already have an account?&nbsp;</span><a href="#">Login</a>
+            <span>Already have an account?&nbsp;</span><a id="login-switcher">Login</a>
         </div>
-    </div> -->
+    </div>
+
+    <script src="./main.js" />
 </body>
 
 </html>
