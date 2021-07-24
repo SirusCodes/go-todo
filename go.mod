@@ -10,7 +10,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.15.0
 	github.com/gofiber/jwt/v2 v2.2.4
 	github.com/golang-jwt/jwt v3.2.1+incompatible // indirect
-	github.com/google/uuid v1.2.0 // indirect
+	github.com/google/uuid v1.3.0 // indirect
 	github.com/joho/godotenv v1.3.0
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/mattn/go-isatty v0.0.13 // indirect
@@ -19,5 +19,5 @@ require (
 	golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97
 	golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c // indirect
 	gorm.io/driver/sqlite v1.1.4 // indirect
-	gorm.io/gorm v1.21.11 // indirect
+	gorm.io/gorm v1.21.12 // indirect
 )
