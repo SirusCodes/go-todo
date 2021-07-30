@@ -15,7 +15,6 @@ button{
 input{
     padding: 10px;
     border: none;
-    margin-bottom: 20px;
     border-radius: 30px;
     outline: none;
 }
@@ -104,4 +103,13 @@ input{
     text-decoration: none;
     color: #2196F3;
     cursor: pointer;
+}
+
+.error{
+    color: red;
+    font-size: 12px;
+}
+
+.space10{
+    height: 10px;
 }

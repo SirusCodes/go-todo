@@ -95,7 +95,7 @@ func Register(c *fiber.Ctx) error {
 	database.DBConn.First(&user, "username=?", req.Username)
 
 	if user.Username != "" {
-		return c.Status(400).JSON(Response{Status: "error", Message: "username already exists"})
+		return c.Status(409).JSON(Response{Status: "error", Message: "username already exists"})
 	}
 
 	hash, err := hashPassword(req.Password)

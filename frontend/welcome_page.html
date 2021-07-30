@@ -21,7 +21,9 @@
     <!-- Login -->
     <form class="auth-body" id="login">
         <input type="text" id="username" placeholder="Username" name="username" required>
+        <div class="space10"></div>
         <input type="password" id="password" placeholder="Password" name="password" required>
+        <div class="space10"></div>
         <button id="login-btn">Login</button>
         <div class="switch-auth">
             <span>Don't have an account?&nbsp;</span><a id="register-switcher">Register</a>
@@ -29,9 +31,12 @@
     </form>
     <!-- Register -->
     <form class="auth-body" id="register" style="display: none;">
-        <input type="text" placeholder="Username" name="username" required>
-        <input type="password" placeholder="Password" name="password" required>
-        <input type="password" placeholder="Confirm password" name="confirmPassword" required>
+        <input type="text" id="username" placeholder="Username" name="username" required>
+        <div class="space10"></div>
+        <input type="password" id="password" placeholder="Password" name="password" required>
+        <div class="space10"></div>
+        <input type="password" id="confirmPassword" placeholder="Confirm password" name="confirmPassword" required>
+        <div class="space10"></div>
         <button id="register-btn">Register</button>
         <div class="switch-auth">
             <span>Already have an account?&nbsp;</span><a id="login-switcher">Login</a>
