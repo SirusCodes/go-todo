@@ -12,6 +12,14 @@ const registerSwitcher = document.getElementById('register-switcher');
 const loginButton = document.getElementById('login-btn');
 const registerButton = document.getElementById('register-btn');
 
+window.addEventListener('load', () => {
+    const username = localStorage.getItem('username');
+    const token = localStorage.getItem('token');
+    if (username && token) {
+        window.location = "http://127.0.0.1:5500/frontend/index.html"
+    }
+});
+
 loginSwitcher.addEventListener('click', () => {
     registerForm.style.display = 'none';
     loginForm.style.display = 'flex';
@@ -53,10 +61,7 @@ loginButton.addEventListener('click', async (e) => {
 
     if (response.status === 200) {
         const result = await response.json();
-        console.log(result);
-        localStorage.setItem('token', result.data.token);
-        localStorage.setItem('refresh_token', result.data.refresh_token);
-        localStorage.setItem('username', result.data.username);
+        authenticationSuccess(result.data.token, result.data.refresh_token, result.data.username);
     } else if (response.status === 403) {
         const error = await response.json();
         showError(error.message, "#login > #password");
@@ -104,10 +109,7 @@ registerButton.addEventListener('click', async (e) => {
 
     if (response.status === 201) {
         const result = await response.json();
-        console.log(result);
-        localStorage.setItem('token', result.data.token);
-        localStorage.setItem('refresh_token', result.data.refresh_token);
-        localStorage.setItem('username', result.data.username);
+        authenticationSuccess(result.data.token, result.data.refresh_token, result.data.username);
     } else if (response.status === 400) {
         const error = await response.json();
         showError(error.message, "#register > #register-btn");
@@ -120,6 +122,13 @@ registerButton.addEventListener('click', async (e) => {
         alert('Register failed');
     }
 });
+
+function authenticationSuccess(token, refresh_token, username) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('refresh_token', refresh_token);
+    localStorage.setItem('username', username);
+    window.location = "index.html";
+}
 
 function removeAllErrorStatements() {
     const errorSpans = document.getElementsByClassName("error");
